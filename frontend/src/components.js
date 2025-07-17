@@ -502,12 +502,22 @@ export const Careers = () => {
 
 // Contact Component
 export const Contact = () => {
+  const { isDarkMode } = useTheme();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     message: ''
   });
+
+  const bgColor = isDarkMode ? 'bg-gray-800' : 'bg-gray-100';
+  const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
+  const subtitleColor = isDarkMode ? 'text-gray-300' : 'text-gray-600';
+  const accentColor = isDarkMode ? 'text-blue-400' : 'text-blue-600';
+  const cardBg = isDarkMode ? 'bg-gray-700' : 'bg-white';
+  const inputBg = isDarkMode ? 'bg-gray-800' : 'bg-gray-50';
+  const inputBorder = isDarkMode ? 'border-gray-600' : 'border-gray-300';
+  const inputFocus = isDarkMode ? 'focus:border-blue-400' : 'focus:border-blue-500';
 
   const handleChange = (e) => {
     setFormData({
@@ -518,71 +528,70 @@ export const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
     alert('Thank you for your message. We will get back to you soon!');
     setFormData({ name: '', email: '', phone: '', message: '' });
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-800">
+    <section id="contact" className={`py-20 ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Get In <span className="text-blue-400">Touch</span>
+          <h2 className={`text-4xl md:text-5xl font-bold ${textColor} mb-6`}>
+            Get In <span className={accentColor}>Touch</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className={`text-xl ${subtitleColor} max-w-3xl mx-auto`}>
             Ready to discuss your defense electronics requirements?
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
-            <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
+            <h3 className={`text-2xl font-bold ${textColor} mb-6`}>Contact Information</h3>
             <div className="space-y-6">
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
+                <div className={`w-12 h-12 ${isDarkMode ? 'bg-blue-600' : 'bg-blue-600'} rounded-lg flex items-center justify-center mr-4`}>
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold">Address</h4>
-                  <p className="text-gray-300">Visakhapatnam, Andhra Pradesh, India</p>
+                  <h4 className={`${textColor} font-semibold`}>Address</h4>
+                  <p className={subtitleColor}>Visakhapatnam, Andhra Pradesh, India</p>
                 </div>
               </div>
               
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
+                <div className={`w-12 h-12 ${isDarkMode ? 'bg-blue-600' : 'bg-blue-600'} rounded-lg flex items-center justify-center mr-4`}>
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold">Quick Contact</h4>
-                  <p className="text-gray-300">Code: 5462</p>
+                  <h4 className={`${textColor} font-semibold`}>Quick Contact</h4>
+                  <p className={subtitleColor}>Code: 5462</p>
                 </div>
               </div>
               
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
+                <div className={`w-12 h-12 ${isDarkMode ? 'bg-blue-600' : 'bg-blue-600'} rounded-lg flex items-center justify-center mr-4`}>
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold">Business Hours</h4>
-                  <p className="text-gray-300">Mon - Fri: 9:00 AM - 6:00 PM</p>
+                  <h4 className={`${textColor} font-semibold`}>Business Hours</h4>
+                  <p className={subtitleColor}>Mon - Fri: 9:00 AM - 6:00 PM</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-gray-700 rounded-lg p-8">
-            <h3 className="text-2xl font-bold text-white mb-6">Send us a Message</h3>
+          <div className={`${cardBg} rounded-lg p-8 shadow-lg`}>
+            <h3 className={`text-2xl font-bold ${textColor} mb-6`}>Send us a Message</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="name" className={`block text-sm font-medium ${subtitleColor} mb-2`}>
                   Name
                 </label>
                 <input
@@ -592,12 +601,12 @@ export const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-600 focus:border-blue-400 focus:outline-none"
+                  className={`w-full px-4 py-3 ${inputBg} ${textColor} rounded-lg border ${inputBorder} ${inputFocus} focus:outline-none transition-colors`}
                 />
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="email" className={`block text-sm font-medium ${subtitleColor} mb-2`}>
                   Email
                 </label>
                 <input
@@ -607,12 +616,12 @@ export const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-600 focus:border-blue-400 focus:outline-none"
+                  className={`w-full px-4 py-3 ${inputBg} ${textColor} rounded-lg border ${inputBorder} ${inputFocus} focus:outline-none transition-colors`}
                 />
               </div>
               
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="phone" className={`block text-sm font-medium ${subtitleColor} mb-2`}>
                   Phone
                 </label>
                 <input
@@ -621,12 +630,12 @@ export const Contact = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-600 focus:border-blue-400 focus:outline-none"
+                  className={`w-full px-4 py-3 ${inputBg} ${textColor} rounded-lg border ${inputBorder} ${inputFocus} focus:outline-none transition-colors`}
                 />
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="message" className={`block text-sm font-medium ${subtitleColor} mb-2`}>
                   Message
                 </label>
                 <textarea
@@ -636,13 +645,13 @@ export const Contact = () => {
                   onChange={handleChange}
                   rows={4}
                   required
-                  className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-600 focus:border-blue-400 focus:outline-none resize-none"
+                  className={`w-full px-4 py-3 ${inputBg} ${textColor} rounded-lg border ${inputBorder} ${inputFocus} focus:outline-none resize-none transition-colors`}
                 />
               </div>
               
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+                className={`w-full ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300`}
               >
                 Send Message
               </button>
@@ -656,47 +665,56 @@ export const Contact = () => {
 
 // Footer Component
 export const Footer = () => {
+  const { isDarkMode } = useTheme();
+  
+  const bgColor = isDarkMode ? 'bg-gray-900' : 'bg-gray-800';
+  const borderColor = isDarkMode ? 'border-gray-800' : 'border-gray-600';
+  const textColor = isDarkMode ? 'text-white' : 'text-gray-100';
+  const subtitleColor = isDarkMode ? 'text-gray-300' : 'text-gray-300';
+  const linkColor = isDarkMode ? 'text-gray-300 hover:text-blue-400' : 'text-gray-300 hover:text-blue-400';
+  const logoColor = isDarkMode ? 'text-blue-400' : 'text-blue-400';
+
   return (
-    <footer className="bg-gray-900 border-t border-gray-800">
+    <footer className={`${bgColor} border-t ${borderColor}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <div className="text-2xl font-bold text-white mb-4">
-              <span className="text-blue-400">essen</span>
+            <div className="text-2xl font-bold mb-4">
+              <span className={logoColor}>essen</span>
               <span className="text-red-400">.</span>
             </div>
-            <p className="text-gray-300 mb-4 max-w-md">
+            <p className={`${subtitleColor} mb-4 max-w-md`}>
               Essen Electronic Systems Private Limited - India's trusted defense electronics manufacturer, 
               serving the nation with integrity and uncompromised quality since 2003.
             </p>
             <div className="flex space-x-4">
-              <span className="text-sm text-gray-400">ISO 9001:2015 TUV India Certified</span>
+              <span className={`text-sm ${subtitleColor}`}>ISO 9001:2015 TUV India Certified</span>
             </div>
           </div>
           
           <div>
-            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+            <h4 className={`${textColor} font-semibold mb-4`}>Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="#about" className="text-gray-300 hover:text-blue-400 transition-colors">About Us</a></li>
-              <li><a href="#services" className="text-gray-300 hover:text-blue-400 transition-colors">Services</a></li>
-              <li><a href="#products" className="text-gray-300 hover:text-blue-400 transition-colors">Products</a></li>
-              <li><a href="#careers" className="text-gray-300 hover:text-blue-400 transition-colors">Careers</a></li>
+              <li><a href="#about" className={`${linkColor} transition-colors`}>About Us</a></li>
+              <li><a href="#services" className={`${linkColor} transition-colors`}>Services</a></li>
+              <li><a href="#products" className={`${linkColor} transition-colors`}>Products</a></li>
+              <li><a href="#careers" className={`${linkColor} transition-colors`}>Careers</a></li>
             </ul>
           </div>
           
           <div>
-            <h4 className="text-white font-semibold mb-4">Services</h4>
+            <h4 className={`${textColor} font-semibold mb-4`}>Services</h4>
             <ul className="space-y-2">
-              <li><span className="text-gray-300">Design & Development</span></li>
-              <li><span className="text-gray-300">Indigenization</span></li>
-              <li><span className="text-gray-300">Manufacturing</span></li>
-              <li><span className="text-gray-300">RRC / AMC Services</span></li>
+              <li><span className={subtitleColor}>Design & Development</span></li>
+              <li><span className={subtitleColor}>Indigenization</span></li>
+              <li><span className={subtitleColor}>Manufacturing</span></li>
+              <li><span className={subtitleColor}>RRC / AMC Services</span></li>
             </ul>
           </div>
         </div>
         
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400">
+        <div className={`border-t ${borderColor} mt-8 pt-8 text-center`}>
+          <p className={`${subtitleColor}`}>
             © 2025 Essen Electronic Systems Private Limited. All Rights Reserved.
           </p>
         </div>

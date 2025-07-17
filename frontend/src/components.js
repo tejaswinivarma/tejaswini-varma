@@ -1,7 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
+
+// Theme Context
+const ThemeContext = createContext();
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
+};
+
+export const ThemeProvider = ({ children }) => {
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  useEffect(() => {
+    // Apply theme to document body
+    if (isDarkMode) {
+      document.body.classList.add('dark');
+      document.body.classList.remove('light');
+    } else {
+      document.body.classList.add('light');
+      document.body.classList.remove('dark');
+    }
+  }, [isDarkMode]);
+
+  return (
+    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
 
 // Header Component
 export const Header = () => {
+  const { isDarkMode, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -21,76 +58,104 @@ export const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const navBg = isDarkMode 
+    ? (isScrolled ? 'bg-gray-900/95' : 'bg-transparent')
+    : (isScrolled ? 'bg-white/95' : 'bg-transparent');
+  
+  const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
+  const logoColor = isDarkMode ? 'text-blue-400' : 'text-blue-600';
+
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-gray-900/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-    }`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${navBg} backdrop-blur-md shadow-lg`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <div className="text-2xl font-bold text-white">
-              <span className="text-blue-400">essen</span>
+            <div className="text-2xl font-bold">
+              <span className={logoColor}>essen</span>
               <span className="text-red-400">.</span>
             </div>
           </div>
           
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              <button onClick={() => scrollToSection('hero')} className="text-blue-400 hover:text-blue-300 transition-colors px-3 py-2 text-sm font-medium bg-gray-900/70 rounded-lg">
-                Home
-              </button>
-              <button onClick={() => scrollToSection('about')} className="text-white hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium bg-gray-900/70 rounded-lg">
-                About Us
-              </button>
-              <button onClick={() => scrollToSection('services')} className="text-white hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium bg-gray-900/70 rounded-lg">
-                Services
-              </button>
-              <button onClick={() => scrollToSection('products')} className="text-white hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium bg-gray-900/70 rounded-lg">
-                Products
-              </button>
-              <button onClick={() => scrollToSection('careers')} className="text-white hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium bg-gray-900/70 rounded-lg">
-                Careers
-              </button>
-              <button onClick={() => scrollToSection('contact')} className="text-white hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium bg-gray-900/70 rounded-lg">
-                Contact
+          <div className="flex items-center space-x-4">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-lg transition-colors ${
+                isDarkMode 
+                  ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400' 
+                  : 'bg-gray-100 hover:bg-gray-200 text-gray-600'
+              }`}
+              title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              {isDarkMode ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:block">
+              <div className="ml-10 flex items-baseline space-x-8">
+                <button onClick={() => scrollToSection('hero')} className={`${isDarkMode ? 'text-blue-400 hover:text-blue-300 bg-gray-900/70' : 'text-blue-600 hover:text-blue-500 bg-white/70'} transition-colors px-3 py-2 text-sm font-medium rounded-lg`}>
+                  Home
+                </button>
+                <button onClick={() => scrollToSection('about')} className={`${isDarkMode ? 'text-white hover:text-blue-400 bg-gray-900/70' : 'text-gray-900 hover:text-blue-600 bg-white/70'} transition-colors px-3 py-2 text-sm font-medium rounded-lg`}>
+                  About Us
+                </button>
+                <button onClick={() => scrollToSection('services')} className={`${isDarkMode ? 'text-white hover:text-blue-400 bg-gray-900/70' : 'text-gray-900 hover:text-blue-600 bg-white/70'} transition-colors px-3 py-2 text-sm font-medium rounded-lg`}>
+                  Services
+                </button>
+                <button onClick={() => scrollToSection('products')} className={`${isDarkMode ? 'text-white hover:text-blue-400 bg-gray-900/70' : 'text-gray-900 hover:text-blue-600 bg-white/70'} transition-colors px-3 py-2 text-sm font-medium rounded-lg`}>
+                  Products
+                </button>
+                <button onClick={() => scrollToSection('careers')} className={`${isDarkMode ? 'text-white hover:text-blue-400 bg-gray-900/70' : 'text-gray-900 hover:text-blue-600 bg-white/70'} transition-colors px-3 py-2 text-sm font-medium rounded-lg`}>
+                  Careers
+                </button>
+                <button onClick={() => scrollToSection('contact')} className={`${isDarkMode ? 'text-white hover:text-blue-400 bg-gray-900/70' : 'text-gray-900 hover:text-blue-600 bg-white/70'} transition-colors px-3 py-2 text-sm font-medium rounded-lg`}>
+                  Contact
+                </button>
+              </div>
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className={`${textColor} hover:text-blue-400 transition-colors`}
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
               </button>
             </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white hover:text-blue-400 transition-colors"
-            >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-900/95 backdrop-blur-md">
-              <button onClick={() => scrollToSection('hero')} className="text-blue-400 hover:text-blue-300 block px-3 py-2 text-base font-medium w-full text-left bg-gray-800/50 rounded-lg">
+            <div className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 ${isDarkMode ? 'bg-gray-900/95' : 'bg-white/95'} backdrop-blur-md`}>
+              <button onClick={() => scrollToSection('hero')} className={`${isDarkMode ? 'text-blue-400 hover:text-blue-300 bg-gray-800/50' : 'text-blue-600 hover:text-blue-500 bg-gray-100/50'} block px-3 py-2 text-base font-medium w-full text-left rounded-lg`}>
                 Home
               </button>
-              <button onClick={() => scrollToSection('about')} className="text-white hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left bg-gray-800/50 rounded-lg">
+              <button onClick={() => scrollToSection('about')} className={`${isDarkMode ? 'text-white hover:text-blue-400 bg-gray-800/50' : 'text-gray-900 hover:text-blue-600 bg-gray-100/50'} block px-3 py-2 text-base font-medium w-full text-left rounded-lg`}>
                 About Us
               </button>
-              <button onClick={() => scrollToSection('services')} className="text-white hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left bg-gray-800/50 rounded-lg">
+              <button onClick={() => scrollToSection('services')} className={`${isDarkMode ? 'text-white hover:text-blue-400 bg-gray-800/50' : 'text-gray-900 hover:text-blue-600 bg-gray-100/50'} block px-3 py-2 text-base font-medium w-full text-left rounded-lg`}>
                 Services
               </button>
-              <button onClick={() => scrollToSection('products')} className="text-white hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left bg-gray-800/50 rounded-lg">
+              <button onClick={() => scrollToSection('products')} className={`${isDarkMode ? 'text-white hover:text-blue-400 bg-gray-800/50' : 'text-gray-900 hover:text-blue-600 bg-gray-100/50'} block px-3 py-2 text-base font-medium w-full text-left rounded-lg`}>
                 Products
               </button>
-              <button onClick={() => scrollToSection('careers')} className="text-white hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left bg-gray-800/50 rounded-lg">
+              <button onClick={() => scrollToSection('careers')} className={`${isDarkMode ? 'text-white hover:text-blue-400 bg-gray-800/50' : 'text-gray-900 hover:text-blue-600 bg-gray-100/50'} block px-3 py-2 text-base font-medium w-full text-left rounded-lg`}>
                 Careers
               </button>
-              <button onClick={() => scrollToSection('contact')} className="text-white hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left bg-gray-800/50 rounded-lg">
+              <button onClick={() => scrollToSection('contact')} className={`${isDarkMode ? 'text-white hover:text-blue-400 bg-gray-800/50' : 'text-gray-900 hover:text-blue-600 bg-gray-100/50'} block px-3 py-2 text-base font-medium w-full text-left rounded-lg`}>
                 Contact
               </button>
             </div>
@@ -103,33 +168,44 @@ export const Header = () => {
 
 // Hero Component
 export const Hero = () => {
+  const { isDarkMode } = useTheme();
+  
+  const bgGradient = isDarkMode 
+    ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900'
+    : 'bg-gradient-to-br from-blue-50 via-white to-blue-100';
+  
+  const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
+  const accentColor = isDarkMode ? 'text-blue-400' : 'text-blue-600';
+  const subtitleBg = isDarkMode ? 'bg-gray-900/70' : 'bg-white/70';
+  const subtitleText = isDarkMode ? 'text-blue-200' : 'text-blue-800';
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
-      <div className="absolute inset-0 bg-black/50"></div>
+    <section id="hero" className={`relative min-h-screen flex items-center justify-center ${bgGradient}`}>
+      <div className="absolute inset-0 bg-black/20"></div>
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
         style={{
           backgroundImage: 'url(https://images.unsplash.com/photo-1700692883604-e0cfbf3b71d7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwxfHxkZWZlbnNlJTIwZWxlY3Ryb25pY3N8ZW58MHx8fGJsdWV8MTc1Mjc0MTA1N3ww&ixlib=rb-4.1.0&q=85)'
         }}
       />
       <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+        <h1 className={`text-5xl md:text-7xl font-bold ${textColor} mb-6 leading-tight`}>
           Defending the Nation with
-          <span className="text-blue-400 block">Advanced Electronics</span>
+          <span className={`${accentColor} block`}>Advanced Electronics</span>
         </h1>
-        <p className="text-xl md:text-2xl text-blue-200 mb-8 leading-relaxed bg-gray-900/70 px-6 py-3 rounded-lg backdrop-blur-sm">
+        <p className={`text-xl md:text-2xl ${subtitleText} mb-8 leading-relaxed ${subtitleBg} px-6 py-3 rounded-lg backdrop-blur-sm`}>
           ISO 9001:2015 certified defense electronics manufacturer serving India for over two decades with integrity and uncompromised quality.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button 
             onClick={() => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+            className={`${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105`}
           >
             Discover Our Solutions
           </button>
           <button 
             onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
-            className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300"
+            className={`border-2 ${isDarkMode ? 'border-blue-400 text-blue-400 hover:bg-blue-400' : 'border-blue-600 text-blue-600 hover:bg-blue-600'} hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300`}
           >
             Get In Touch
           </button>

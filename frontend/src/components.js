@@ -37,22 +37,22 @@ export const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <button onClick={() => scrollToSection('hero')} className="text-white hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">
+              <button onClick={() => scrollToSection('hero')} className="text-blue-400 hover:text-blue-300 transition-colors px-3 py-2 text-sm font-medium bg-gray-900/70 rounded-lg">
                 Home
               </button>
-              <button onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">
+              <button onClick={() => scrollToSection('about')} className="text-white hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium bg-gray-900/70 rounded-lg">
                 About Us
               </button>
-              <button onClick={() => scrollToSection('services')} className="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">
+              <button onClick={() => scrollToSection('services')} className="text-white hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium bg-gray-900/70 rounded-lg">
                 Services
               </button>
-              <button onClick={() => scrollToSection('products')} className="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">
+              <button onClick={() => scrollToSection('products')} className="text-white hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium bg-gray-900/70 rounded-lg">
                 Products
               </button>
-              <button onClick={() => scrollToSection('careers')} className="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">
+              <button onClick={() => scrollToSection('careers')} className="text-white hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium bg-gray-900/70 rounded-lg">
                 Careers
               </button>
-              <button onClick={() => scrollToSection('contact')} className="text-gray-300 hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium">
+              <button onClick={() => scrollToSection('contact')} className="text-white hover:text-blue-400 transition-colors px-3 py-2 text-sm font-medium bg-gray-900/70 rounded-lg">
                 Contact
               </button>
             </div>

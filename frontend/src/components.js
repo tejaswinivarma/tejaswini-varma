@@ -217,14 +217,22 @@ export const Hero = () => {
 
 // About Component
 export const About = () => {
+  const { isDarkMode } = useTheme();
+  
+  const bgColor = isDarkMode ? 'bg-gray-800' : 'bg-gray-100';
+  const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
+  const subtitleColor = isDarkMode ? 'text-gray-300' : 'text-gray-600';
+  const accentColor = isDarkMode ? 'text-blue-400' : 'text-blue-600';
+  const cardBg = isDarkMode ? 'bg-gray-700' : 'bg-white';
+
   return (
-    <section id="about" className="py-20 bg-gray-800">
+    <section id="about" className={`py-20 ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            About <span className="text-blue-400">Essen Electronic Systems</span>
+          <h2 className={`text-4xl md:text-5xl font-bold ${textColor} mb-6`}>
+            About <span className={accentColor}>Essen Electronic Systems</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className={`text-xl ${subtitleColor} max-w-3xl mx-auto`}>
             An Indian Defence Licensed Industry serving the nation with cutting-edge electronic solutions
           </p>
         </div>
@@ -238,21 +246,21 @@ export const About = () => {
             />
           </div>
           <div>
-            <h3 className="text-2xl font-bold text-white mb-6">Leading Defense Electronics Innovation</h3>
-            <p className="text-gray-300 mb-6 leading-relaxed">
+            <h3 className={`text-2xl font-bold ${textColor} mb-6`}>Leading Defense Electronics Innovation</h3>
+            <p className={`${subtitleColor} mb-6 leading-relaxed`}>
               ESSEN is an INDIAN DEFENCE LICENSED INDUSTRY which has been serving the NATION for almost two decades with INTEGRITY and un-compromised QUALITY. We provide indigenous solutions to various sectors including Defence and Aerospace.
             </p>
-            <p className="text-gray-300 mb-6 leading-relaxed">
+            <p className={`${subtitleColor} mb-6 leading-relaxed`}>
               Our expertise spans across missile onboard systems, radar technology, sonar systems, and advanced electronic warfare solutions. We specialize in indigenization of foreign systems and provide comprehensive support from design to manufacturing.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-gray-700 p-6 rounded-lg">
-                <h4 className="text-blue-400 font-semibold mb-2">ISO 9001:2015</h4>
-                <p className="text-gray-300">Certified Quality Management</p>
+              <div className={`${cardBg} p-6 rounded-lg shadow-lg`}>
+                <h4 className={`${accentColor} font-semibold mb-2`}>ISO 9001:2015</h4>
+                <p className={subtitleColor}>Certified Quality Management</p>
               </div>
-              <div className="bg-gray-700 p-6 rounded-lg">
-                <h4 className="text-blue-400 font-semibold mb-2">20+ Years</h4>
-                <p className="text-gray-300">Industry Experience</p>
+              <div className={`${cardBg} p-6 rounded-lg shadow-lg`}>
+                <h4 className={`${accentColor} font-semibold mb-2`}>20+ Years</h4>
+                <p className={subtitleColor}>Industry Experience</p>
               </div>
             </div>
           </div>
@@ -264,6 +272,15 @@ export const About = () => {
 
 // Services Component
 export const Services = () => {
+  const { isDarkMode } = useTheme();
+  
+  const bgColor = isDarkMode ? 'bg-gray-900' : 'bg-white';
+  const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
+  const subtitleColor = isDarkMode ? 'text-gray-300' : 'text-gray-600';
+  const accentColor = isDarkMode ? 'text-blue-400' : 'text-blue-600';
+  const cardBg = isDarkMode ? 'bg-gray-800' : 'bg-gray-50';
+  const cardHover = isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100';
+
   const services = [
     {
       title: "Design & Development",
@@ -304,28 +321,28 @@ export const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-gray-900">
+    <section id="services" className={`py-20 ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Our <span className="text-blue-400">Services</span>
+          <h2 className={`text-4xl md:text-5xl font-bold ${textColor} mb-6`}>
+            Our <span className={accentColor}>Services</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className={`text-xl ${subtitleColor} max-w-3xl mx-auto`}>
             Comprehensive defense electronics solutions from concept to deployment
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="bg-gray-800 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+            <div key={index} className={`${cardBg} ${cardHover} rounded-lg overflow-hidden shadow-xl transition-all duration-300 transform hover:scale-105`}>
               <div className="h-48 bg-cover bg-center" style={{backgroundImage: `url(${service.image})`}}>
                 <div className="h-full bg-black/40 flex items-center justify-center">
                   <span className="text-4xl">{service.icon}</span>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
-                <p className="text-gray-300 leading-relaxed">{service.description}</p>
+                <h3 className={`text-xl font-bold ${textColor} mb-3`}>{service.title}</h3>
+                <p className={`${subtitleColor} leading-relaxed`}>{service.description}</p>
               </div>
             </div>
           ))}

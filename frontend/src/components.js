@@ -75,22 +75,22 @@ export const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-900/95 backdrop-blur-md">
-              <button onClick={() => scrollToSection('hero')} className="text-white hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left">
+              <button onClick={() => scrollToSection('hero')} className="text-blue-400 hover:text-blue-300 block px-3 py-2 text-base font-medium w-full text-left bg-gray-800/50 rounded-lg">
                 Home
               </button>
-              <button onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left">
+              <button onClick={() => scrollToSection('about')} className="text-white hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left bg-gray-800/50 rounded-lg">
                 About Us
               </button>
-              <button onClick={() => scrollToSection('services')} className="text-gray-300 hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left">
+              <button onClick={() => scrollToSection('services')} className="text-white hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left bg-gray-800/50 rounded-lg">
                 Services
               </button>
-              <button onClick={() => scrollToSection('products')} className="text-gray-300 hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left">
+              <button onClick={() => scrollToSection('products')} className="text-white hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left bg-gray-800/50 rounded-lg">
                 Products
               </button>
-              <button onClick={() => scrollToSection('careers')} className="text-gray-300 hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left">
+              <button onClick={() => scrollToSection('careers')} className="text-white hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left bg-gray-800/50 rounded-lg">
                 Careers
               </button>
-              <button onClick={() => scrollToSection('contact')} className="text-gray-300 hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left">
+              <button onClick={() => scrollToSection('contact')} className="text-white hover:text-blue-400 block px-3 py-2 text-base font-medium w-full text-left bg-gray-800/50 rounded-lg">
                 Contact
               </button>
             </div>

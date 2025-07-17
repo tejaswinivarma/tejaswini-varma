@@ -117,7 +117,7 @@ export const Hero = () => {
           Defending the Nation with
           <span className="text-blue-400 block">Advanced Electronics</span>
         </h1>
-        <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+        <p className="text-xl md:text-2xl text-blue-200 mb-8 leading-relaxed bg-gray-900/70 px-6 py-3 rounded-lg backdrop-blur-sm">
           ISO 9001:2015 certified defense electronics manufacturer serving India for over two decades with integrity and uncompromised quality.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

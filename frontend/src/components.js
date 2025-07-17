@@ -354,6 +354,15 @@ export const Services = () => {
 
 // Products Component
 export const Products = () => {
+  const { isDarkMode } = useTheme();
+  
+  const bgColor = isDarkMode ? 'bg-gray-800' : 'bg-gray-100';
+  const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
+  const subtitleColor = isDarkMode ? 'text-gray-300' : 'text-gray-600';
+  const accentColor = isDarkMode ? 'text-blue-400' : 'text-blue-600';
+  const cardBg = isDarkMode ? 'bg-gray-700' : 'bg-white';
+  const cardHover = isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-50';
+
   const products = [
     {
       category: "Missile Systems",
@@ -382,25 +391,25 @@ export const Products = () => {
   ];
 
   return (
-    <section id="products" className="py-20 bg-gray-800">
+    <section id="products" className={`py-20 ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Our <span className="text-blue-400">Products</span>
+          <h2 className={`text-4xl md:text-5xl font-bold ${textColor} mb-6`}>
+            Our <span className={accentColor}>Products</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className={`text-xl ${subtitleColor} max-w-3xl mx-auto`}>
             Advanced defense electronics across multiple domains
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product, index) => (
-            <div key={index} className="bg-gray-700 rounded-lg p-6 hover:bg-gray-600 transition-all duration-300">
-              <h3 className="text-xl font-bold text-blue-400 mb-4">{product.category}</h3>
+            <div key={index} className={`${cardBg} ${cardHover} rounded-lg p-6 shadow-lg transition-all duration-300`}>
+              <h3 className={`text-xl font-bold ${accentColor} mb-4`}>{product.category}</h3>
               <ul className="space-y-2">
                 {product.items.map((item, itemIndex) => (
-                  <li key={itemIndex} className="text-gray-300 flex items-center">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                  <li key={itemIndex} className={`${subtitleColor} flex items-center`}>
+                    <span className={`w-2 h-2 ${isDarkMode ? 'bg-blue-400' : 'bg-blue-600'} rounded-full mr-3`}></span>
                     {item}
                   </li>
                 ))}
@@ -415,6 +424,15 @@ export const Products = () => {
 
 // Careers Component
 export const Careers = () => {
+  const { isDarkMode } = useTheme();
+  
+  const bgColor = isDarkMode ? 'bg-gray-900' : 'bg-white';
+  const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
+  const subtitleColor = isDarkMode ? 'text-gray-300' : 'text-gray-600';
+  const accentColor = isDarkMode ? 'text-blue-400' : 'text-blue-600';
+  const cardBg = isDarkMode ? 'bg-gray-800' : 'bg-gray-50';
+  const cardHover = isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100';
+
   const openings = [
     {
       title: "PCB CAD Designers",
@@ -437,41 +455,41 @@ export const Careers = () => {
   ];
 
   return (
-    <section id="careers" className="py-20 bg-gray-900">
+    <section id="careers" className={`py-20 ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Join Our <span className="text-blue-400">Team</span>
+          <h2 className={`text-4xl md:text-5xl font-bold ${textColor} mb-6`}>
+            Join Our <span className={accentColor}>Team</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className={`text-xl ${subtitleColor} max-w-3xl mx-auto`}>
             Be part of India's defense technology revolution
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {openings.map((job, index) => (
-            <div key={index} className="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-all duration-300">
-              <h3 className="text-xl font-bold text-white mb-3">{job.title}</h3>
+            <div key={index} className={`${cardBg} ${cardHover} rounded-lg p-6 shadow-lg transition-all duration-300`}>
+              <h3 className={`text-xl font-bold ${textColor} mb-3`}>{job.title}</h3>
               <div className="space-y-2 mb-6">
-                <p className="text-gray-300"><span className="text-blue-400">Department:</span> {job.department}</p>
-                <p className="text-gray-300"><span className="text-blue-400">Type:</span> {job.type}</p>
-                <p className="text-gray-300"><span className="text-blue-400">Location:</span> {job.location}</p>
+                <p className={subtitleColor}><span className={accentColor}>Department:</span> {job.department}</p>
+                <p className={subtitleColor}><span className={accentColor}>Type:</span> {job.type}</p>
+                <p className={subtitleColor}><span className={accentColor}>Location:</span> {job.location}</p>
               </div>
-              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300">
+              <button className={`w-full ${isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'} text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300`}>
                 Apply Now
               </button>
             </div>
           ))}
         </div>
 
-        <div className="mt-16 bg-red-900/20 border border-red-500 rounded-lg p-6">
+        <div className={`mt-16 ${isDarkMode ? 'bg-red-900/20 border-red-500' : 'bg-red-50 border-red-300'} border rounded-lg p-6`}>
           <div className="flex items-center mb-4">
-            <svg className="w-6 h-6 text-red-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className={`w-6 h-6 ${isDarkMode ? 'text-red-400' : 'text-red-600'} mr-3`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
             </svg>
-            <h3 className="text-lg font-semibold text-red-400">Important Notice</h3>
+            <h3 className={`text-lg font-semibold ${isDarkMode ? 'text-red-400' : 'text-red-600'}`}>Important Notice</h3>
           </div>
-          <p className="text-gray-300">
+          <p className={subtitleColor}>
             <strong>Caution Against Fraudulent Offers:</strong> Please be aware of fraudulent employment offers. 
             Essen Electronic Systems does not charge any fees for job applications or recruitment processes. 
             All legitimate communications come through official channels only.
